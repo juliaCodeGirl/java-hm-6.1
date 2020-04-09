@@ -21,37 +21,36 @@ public class StatsService {
 
     //номер месяца, в котором пик продаж
     public int calcMountMax (int[] monthSales) {
-        int salesMax = monthSales[0];
-        int i = 1;
-        int monthMaxSales = 1;
-        while (i < monthSales.length) {
-            if (monthSales[i] >= salesMax) {
+        int salesMax = 0;
+        int monthMaxSales = 0;
+        for ( int i = 0; i < monthSales.length; i++) {
+            if (salesMax <= monthSales[i]) {
                 salesMax = monthSales[i];
-                monthMaxSales = i + 1;
+                monthMaxSales = i;
             }
-            i++;
         }
-        return monthMaxSales;
+        return monthMaxSales+1;
     }
 
     //номер месяца, в котором минимум продаж
     public int calcMonthMin (int[] monthSales) {
         int salesMin = monthSales[0];
-        int monthMinSales = 1;
-        for (int i = 1; i < monthSales.length; i++) {
-            if (monthSales[i] <= salesMin) {
+        int monthMinSales = 0;
+        for ( int i = 0; i < monthSales.length; i++) {
+            if (salesMin > monthSales[i]) {
                 salesMin = monthSales[i];
-                monthMinSales = i + 1;}
+                monthMinSales = i;
+            }
         }
-    return monthMinSales;
+    return monthMinSales+1;
     }
 
     //кол-во месяцев с выше среднего
     public int calcBelowAverage(int[] monthSales) {
-        double average = calcAverageSales(monthSales);
+        int average = calcAverageSales(monthSales);
         int monthAboveCounter = 0;
-        for (int monthSale : monthSales) {
-            if (monthSale > average) {
+        for (int i = 0; i < monthSales.length; i++) {
+            if (monthSales[i] < average) {
                 monthAboveCounter++;
             }
         }
@@ -60,14 +59,14 @@ public class StatsService {
 
     //кол-во месяцев в ниже среднего
     public int calcAboveAverage(int[] monthSales) {
-        double average = calcAverageSales(monthSales);
+        int average = calcAverageSales(monthSales);
         int monthBelowCounter = 0;
-        for (int monthSale : monthSales) {
-            if (monthSale < average) {
+        for (int i = 0; i < monthSales[i]; i++) {
+            if (average < monthSales[i]) {
                 monthBelowCounter++;
             }
         }
-        return monthBelowCounter;
+        return monthBelowCounter+1;
     }
 }
 
